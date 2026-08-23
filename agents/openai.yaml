@@ -1,0 +1,4 @@
+interface:
+  display_name: "Visual Token Editorial"
+  short_description: "Create deterministic image-token editorial poetry"
+  default_prompt: "Use $visual-token-editorial to turn this photo into a deterministic visual-token editorial poster."
