@@ -194,6 +194,11 @@ def validate(path: Path) -> tuple[dict[str, Any], list[str], list[str], dict[str
             errors.append(f"{label}.display_height_px must be a positive integer")
         else:
             display_heights.append(display_height)
+            if display_height < round(font_size * 1.45):
+                warnings.append(
+                    f"{token_id}: inline token is small ({display_height}px); consider at least "
+                    f"{round(font_size * 1.45)}px for stronger visual presence"
+                )
         if not isinstance(token.get("semantic_role"), str) or not token.get("semantic_role", "").strip():
             errors.append(f"{label}.semantic_role must be non-empty")
         mask = token.get("mask")
@@ -223,6 +228,8 @@ def validate(path: Path) -> tuple[dict[str, Any], list[str], list[str], dict[str
     if not isinstance(lines, list) or not lines:
         errors.append("sentence.lines must be a non-empty array")
     else:
+        if len(lines) > 4:
+            errors.append("sentence.lines must contain no more than 4 lines")
         for line_index, line in enumerate(lines):
             if not isinstance(line, list) or not line:
                 errors.append(f"sentence.lines[{line_index}] must be a non-empty array")

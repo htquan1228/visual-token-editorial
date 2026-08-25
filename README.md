@@ -14,6 +14,7 @@ Each composition is arranged as a portrait editorial page with generous warm off
 - Image fragments embedded directly into the sentence as semantic words
 - One consistent half-width wrapper style per composition: `()` or `{}`
 - Neutral sans-serif typography with compact leading
+- Larger inline image tokens and copy constrained to no more than four balanced lines
 - A complete upper text-and-image framework centered in the white region
 - Solid masks in the lower photograph that correspond exactly to the extracted fragments
 - At least 2.5% breathing room between every mask and all four photograph edges

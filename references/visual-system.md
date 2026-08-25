@@ -37,11 +37,13 @@ Upper-sentence fragments are exact evidence taken from the source and used as se
 - Use concise natural language, at most one metaphor, and no slogans or empty philosophy.
 - When Chinese is requested, favor short clauses, deliberate punctuation, and varied cadence.
 - Every token must complete or enrich the sentence syntactically.
+- Keep the complete copy within four lines. Commas guide sentence rhythm but are not automatic line-break markers; avoid layouts in which each comma starts a new line.
 
 ## Typography
 
 - Use a neutral sans serif; prefer Microsoft YaHei for Chinese.
 - Use regular or medium weight on generous warm off-white space.
+- Start inline token height near `font_size_px * 1.6`; a usual working range is `1.45–1.9` times the font size. Shorten copy or rebalance runs before shrinking a token below this range.
 - Use compact leading: begin with `line_height_px = max(round(font_size_px * 2.15), tallest_token_height_px + 24)`, then adjust only enough to prevent collisions.
 - Center each line, then center the actual visible block as a whole.
 - Prose and wrappers share the exact baseline. Move the image to the wrapper's visible centerline.

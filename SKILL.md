@@ -14,7 +14,7 @@ Create one static portrait composition from one source photograph. Treat it as r
 3. If cropping is approved, preserve the original and create one deterministic cropped working image without generative fill, retouching, or rescaling distortion. Choose the landscape ratio from the image rather than forcing one universal ratio. Generate or place the final copy only after this working image is fixed.
 4. Determine the copy mode. If the user supplies copy, preserve its wording, punctuation, and language; only add line breaks and inline token positions. If no copy is supplied, automatically write restrained poetic copy in English, or in another language selected by the user.
 5. Select 4–7 source details that correspond to concrete words or images in the copy. Preview every crop alone at its final display size and keep it only if the named object or attribute remains immediately recognizable. Let semantic fit, image density, and the harmony of the resulting holes determine the exact count.
-6. Use compact leading. Start near 2.15 times the font size and preserve enough clearance for the tallest inline token.
+6. Keep the copy to no more than four lines. Do not treat every comma as an automatic line break; group related clauses into visually balanced lines. Start token display height near 1.6 times the font size, then use compact leading near 2.15 times the font size with enough clearance for the tallest token.
 7. Create `composition.yaml` from [composition-schema.md](references/composition-schema.md). It uses JSON-compatible YAML and needs no PyYAML.
 8. Run `scripts/validate_composition.py composition.yaml`; fix errors and consciously review crop-size or loose-leading warnings.
 9. Run `scripts/render_composition.py composition.yaml --output final.png --qa qa_report.md`.
@@ -38,6 +38,7 @@ Create one static portrait composition from one source photograph. Treat it as r
 - Align each token image centerline to its wrapper's visible-glyph centerline within 1 px.
 - Center the complete visible upper framework horizontally and vertically in the upper white region within 1 px.
 - Keep tokens inline. No specimen row, legend, card UI, shadows, borders, or rounded cards.
+- Use one to four text lines. If four lines do not fit, shorten auto-generated copy, rebalance token placement, or reduce font size before considering smaller tokens; never add a fifth line.
 - Final output uses deterministic Pillow rendering. Image generation is only for a labeled concept preview.
 
 ## Revisions
