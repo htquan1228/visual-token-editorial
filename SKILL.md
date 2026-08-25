@@ -11,7 +11,7 @@ Create one static portrait composition from one source photograph. Treat it as r
 
 1. Determine the copy mode before choosing crops. If the user supplies copy, preserve its wording, punctuation, and language; only add line breaks and inline token positions. If no copy is supplied, automatically write restrained poetic copy in English, or in another language explicitly requested by the user.
 2. Read [visual-system.md](references/visual-system.md), inspect the source, and work from the final copy.
-3. Select 4–7 small recognizable source details that correspond to concrete words or images in the copy. Let semantic fit, image density, and the harmony of the resulting holes determine the exact count. Do not force unrelated crops merely to reach the minimum.
+3. Select 4–7 source details that correspond to concrete words or images in the copy. Preview every crop alone at its final display size and keep it only if the named object or attribute remains immediately recognizable. Let semantic fit, image density, and the harmony of the resulting holes determine the exact count.
 4. Use compact leading. Start near 2.15 times the font size and preserve enough clearance for the tallest inline token.
 5. Create `composition.yaml` from [composition-schema.md](references/composition-schema.md). It uses JSON-compatible YAML and needs no PyYAML.
 6. Run `scripts/validate_composition.py composition.yaml`; fix errors and consciously review crop-size or loose-leading warnings.
@@ -27,6 +27,8 @@ Create one static portrait composition from one source photograph. Treat it as r
 - Preserve every lower-image pixel outside declared masks after EXIF transpose and deterministic resize.
 - Masks are solid canvas-background rectangles only: no inpainting, retouching, regeneration, color grading, or whole-object removal.
 - Prefer the smallest recognizable partial object. Width >20%, height >25%, or area >6% is a mandatory review warning.
+- A token must retain distinctive identity cues outside the source context, such as silhouette, structure, material, color, or a characteristic part. Reject generic strips or textures mislabeled as an object; for example, a dark hull band alone is not a recognizable boat.
+- A small person may be extracted as a complete figure when the full silhouette improves recognizability and the resulting local mask does not disturb the lower composition. Do not remove a large or visually dominant person in full.
 - Choose one wrapper per composition—`parentheses` or `braces`—and never mix them.
 - Wrapper glyphs and prose use one font, size, weight, and exact baseline.
 - Align each token image centerline to its wrapper's visible-glyph centerline within 1 px.

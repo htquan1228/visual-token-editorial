@@ -11,6 +11,10 @@ Upper-sentence fragments are exact evidence taken from the source and used as se
 - Do not insert a semantically unrelated crop merely to satisfy the count. If the supplied copy cannot support four credible visual correspondences, explain the mismatch and propose a minimal copy adjustment before rendering.
 - Avoid bboxes spanning unrelated objects, depth layers, or broad horizon bands.
 - Prefer a characteristic fragment over an entire dominant landmark.
+- Preview each crop by itself at its final inline size. A viewer must be able to recognize the named object or attribute without seeing the source photograph.
+- Preserve distinctive cues such as silhouette, structural junctions, material, characteristic color, or an identifying part. A crop named `boat` should show a prow, gunwale, cabin, person-in-boat relationship, or another boat-specific cue—not merely a dark horizontal strip.
+- A small person may be cropped as a complete figure when the whole-body silhouette is the clearest identity cue and the resulting hole remains local and harmonious. This exception does not apply to large or dominant figures.
+- If no compact crop preserves identity, choose a different object or rewrite the automatically generated copy around a clearer detail.
 - Review width above 20%, height above 25%, or area above 6%.
 - Judge the holes as a composition: they must not collapse the lower image's focal structure.
 
