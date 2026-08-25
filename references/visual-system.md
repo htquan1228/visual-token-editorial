@@ -4,6 +4,14 @@
 
 Upper-sentence fragments are exact evidence taken from the source and used as semantic words. The lower photograph shows those same regions as quiet absences: `extract -> reference -> remove`.
 
+## Source framing
+
+- Before copywriting or token selection, confirm whether the user wants the source cropped, whether they will supply copy, and the copy language. Ask once for only the choices not already stated.
+- Recommend cropping when a very tall or awkward source would make the final poster excessively long or leave a weak focal structure. Name the proposed landscape ratio or crop direction and what important content it preserves.
+- Crop only with user approval. Keep the original unchanged and create one deterministic working crop; do not use generative expansion, inpainting, retouching, or stretched resizing.
+- Choose the landscape ratio from the photograph's geometry and focal subject. Common ratios such as 4:3, 3:2, or 16:9 are options, not defaults.
+- Once approved, lock the working crop before generating copy. All token coordinates, masks, and lower-image QA are relative to that cropped working image.
+
 ## Crop selection
 
 - Select 4–7 compact, recognizable details. Let image density, available negative space, and the harmony of the resulting holes determine the exact count.

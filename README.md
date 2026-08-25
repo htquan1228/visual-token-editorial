@@ -33,6 +33,16 @@ The crop is not decoration. It carries meaning in the sentence and points back t
 | --- | --- |
 | ![Late Light, Open City](examples/late-light-open-city.png) | ![Signals at Blue Hour](examples/signals-at-blue-hour.png) |
 
+## Before Generation
+
+Before editing the image, the Skill resolves three choices and asks only for anything the user has not already specified:
+
+1. Whether the source should be cropped
+2. Whether the copy is user-provided or automatically generated
+3. Which language the copy should use
+
+When a very tall or awkward source would create an excessively long poster or weak composition, the Skill recommends a specific landscape crop and explains what it preserves. Cropping happens only after approval. The original remains unchanged, while one deterministic working crop is locked before copywriting and token selection. All token coordinates, masks, resizing, and pixel QA then use that working crop as their source baseline.
+
 ## How It Works
 
 The Skill supports two copy modes:
@@ -79,6 +89,12 @@ You can also request another language without supplying copy:
 
 ```text
 Use $visual-token-editorial and write the copy in Chinese.
+```
+
+For a tall source, ask the Skill to propose the framing before generation:
+
+```text
+Use $visual-token-editorial. If this image is too tall, first propose a suitable landscape crop. Generate the copy automatically in Italian.
 ```
 
 ## Output
