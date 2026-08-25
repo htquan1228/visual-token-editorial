@@ -29,6 +29,7 @@ Create one static portrait composition from one source photograph. Treat it as r
 - User-provided copy is authoritative. Do not paraphrase or replace it unless the user asks for editing.
 - Preserve every lower-image pixel outside declared masks after EXIF transpose and deterministic resize.
 - Masks are solid canvas-background rectangles only: no inpainting, retouching, regeneration, color grading, or whole-object removal.
+- Keep every token and mask bbox at least 2.5% inside all four edges of the working source. Never let a missing region touch or visually merge with the photo boundary.
 - Prefer the smallest recognizable partial object. Width >20%, height >25%, or area >6% is a mandatory review warning.
 - A token must retain distinctive identity cues outside the source context, such as silhouette, structure, material, color, or a characteristic part. Reject generic strips or textures mislabeled as an object; for example, a dark hull band alone is not a recognizable boat.
 - A small person may be extracted as a complete figure when the full silhouette improves recognizability and the resulting local mask does not disturb the lower composition. Do not remove a large or visually dominant person in full.

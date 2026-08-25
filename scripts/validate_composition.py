@@ -15,6 +15,7 @@ from PIL import Image, ImageOps
 HEX_COLOR = re.compile(r"^#[0-9a-fA-F]{6}$")
 HEX_SHA256 = re.compile(r"^[0-9a-fA-F]{64}$")
 WRAPPERS = {"parentheses", "braces"}
+MIN_EDGE_CLEARANCE = 0.025
 
 
 def sha256_file(path: Path) -> str:
@@ -178,6 +179,11 @@ def validate(path: Path) -> tuple[dict[str, Any], list[str], list[str], dict[str
             x, y, width, height = [float(v) for v in bbox]
             if x < 0 or y < 0 or width <= 0 or height <= 0 or x + width > 1 or y + height > 1:
                 errors.append(f"{label}.source_bbox must be positive and stay inside normalized source bounds")
+            elif min(x, y, 1 - x - width, 1 - y - height) < MIN_EDGE_CLEARANCE - 1e-9:
+                errors.append(
+                    f"{label}.source_bbox must keep at least {MIN_EDGE_CLEARANCE:.3f} "
+                    "normalized clearance from every source edge"
+                )
             if width > 0.20 or height > 0.25 or width * height > 0.06:
                 warnings.append(
                     f"{token_id}: review large crop "

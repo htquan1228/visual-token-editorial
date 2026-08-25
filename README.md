@@ -16,6 +16,7 @@ Each composition is arranged as a portrait editorial page with generous warm off
 - Neutral sans-serif typography with compact leading
 - A complete upper text-and-image framework centered in the white region
 - Solid masks in the lower photograph that correspond exactly to the extracted fragments
+- At least 2.5% breathing room between every mask and all four photograph edges
 - Raw rectangular crops without cards, rounded corners, borders, shadows, or UI styling
 - A quiet, modern editorial mood rather than an advertising or scrapbook layout
 
