@@ -34,12 +34,19 @@ def load_font(config_dir: Path, typography: dict[str, Any]) -> tuple[ImageFont.F
     configured = typography.get("font_file")
     if configured:
         candidates = [resolve_relative(config_dir, configured)]
-    elif str(typography.get("language", "en")).lower().split("-")[0] in {"zh", "ja", "ko"}:
+    elif str(typography.get("language", "en")).lower().split("-")[0] == "zh":
         candidates = [
+            Path(r"C:\Windows\Fonts\Deng.ttf"),
             Path(r"C:\Windows\Fonts\msyh.ttc"),
             Path(r"C:\Windows\Fonts\msyhbd.ttc"),
+            Path(r"C:\Windows\Fonts\arial.ttf"),
+        ]
+    elif str(typography.get("language", "en")).lower().split("-")[0] in {"ja", "ko"}:
+        candidates = [
             Path(r"C:\Windows\Fonts\meiryo.ttc"),
+            Path(r"C:\Windows\Fonts\YuGothR.ttc"),
             Path(r"C:\Windows\Fonts\malgun.ttf"),
+            Path(r"C:\Windows\Fonts\msyh.ttc"),
             Path(r"C:\Windows\Fonts\arial.ttf"),
         ]
     else:

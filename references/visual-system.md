@@ -24,6 +24,7 @@ Upper-sentence fragments are exact evidence taken from the source and used as se
 - A small person may be cropped as a complete figure when the whole-body silhouette is the clearest identity cue and the resulting hole remains local and harmonious. This exception does not apply to large or dominant figures.
 - If no compact crop preserves identity, choose a different object or rewrite the automatically generated copy around a clearer detail.
 - Keep each bbox at least `0.025` normalized units away from the working image's left, top, right, and bottom edges. Edge-touching or near-flush holes are forbidden; choose another detail when the subject cannot retain this breathing room.
+- Keep the normalized edge-to-edge distance between every pair of bboxes at least `0.02`. Do not create clusters of adjacent holes even when the crops are semantically strong.
 - Review width above 20%, height above 25%, or area above 6%.
 - Judge the holes as a composition: they must not collapse the lower image's focal structure.
 
@@ -41,7 +42,7 @@ Upper-sentence fragments are exact evidence taken from the source and used as se
 
 ## Typography
 
-- Use a neutral sans serif; prefer Microsoft YaHei for Chinese.
+- Use a neutral sans serif; prefer DengXian Regular for a lighter editorial Chinese texture, then fall back to Microsoft YaHei. A user-supplied `font_file` remains authoritative.
 - Use regular or medium weight on generous warm off-white space.
 - Start inline token height near `font_size_px * 1.6`; a usual working range is `1.45–1.9` times the font size. Shorten copy or rebalance runs before shrinking a token below this range.
 - Use compact leading: begin with `line_height_px = max(round(font_size_px * 2.15), tallest_token_height_px + 24)`, then adjust only enough to prevent collisions.

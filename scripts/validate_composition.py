@@ -16,6 +16,7 @@ HEX_COLOR = re.compile(r"^#[0-9a-fA-F]{6}$")
 HEX_SHA256 = re.compile(r"^[0-9a-fA-F]{64}$")
 WRAPPERS = {"parentheses", "braces"}
 MIN_EDGE_CLEARANCE = 0.025
+MIN_MASK_SEPARATION = 0.02
 
 
 def sha256_file(path: Path) -> str:
@@ -156,6 +157,7 @@ def validate(path: Path) -> tuple[dict[str, Any], list[str], list[str], dict[str
         errors.append("tokens must contain 4 to 7 items, selected according to the image")
     token_ids: list[str] = []
     display_heights: list[int] = []
+    token_bboxes: list[tuple[str, float, float, float, float]] = []
     for index, token in enumerate(tokens_value):
         label = f"tokens[{index}]"
         if not isinstance(token, dict):
@@ -184,6 +186,8 @@ def validate(path: Path) -> tuple[dict[str, Any], list[str], list[str], dict[str
                     f"{label}.source_bbox must keep at least {MIN_EDGE_CLEARANCE:.3f} "
                     "normalized clearance from every source edge"
                 )
+            if width > 0 and height > 0 and x >= 0 and y >= 0 and x + width <= 1 and y + height <= 1:
+                token_bboxes.append((token_id, x, y, width, height))
             if width > 0.20 or height > 0.25 or width * height > 0.06:
                 warnings.append(
                     f"{token_id}: review large crop "
@@ -208,6 +212,17 @@ def validate(path: Path) -> tuple[dict[str, Any], list[str], list[str], dict[str
     duplicates = [token_id for token_id, count in Counter(token_ids).items() if count > 1]
     if duplicates:
         errors.append(f"token IDs must be unique: {', '.join(duplicates)}")
+
+    for index, (id_a, ax, ay, aw, ah) in enumerate(token_bboxes):
+        for id_b, bx, by, bw, bh in token_bboxes[index + 1 :]:
+            gap_x = max(ax - (bx + bw), bx - (ax + aw), 0.0)
+            gap_y = max(ay - (by + bh), by - (ay + ah), 0.0)
+            distance = (gap_x * gap_x + gap_y * gap_y) ** 0.5
+            if distance < MIN_MASK_SEPARATION - 1e-9:
+                errors.append(
+                    f"token bboxes {id_a} and {id_b} are too close; keep at least "
+                    f"{MIN_MASK_SEPARATION:.3f} normalized edge-to-edge separation"
+                )
 
     if display_heights:
         minimum_safe_leading = max(font_size + 12, max(display_heights) + 16)
